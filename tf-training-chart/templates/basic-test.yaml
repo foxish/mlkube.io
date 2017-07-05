@@ -9,7 +9,10 @@ spec:
     - name: basic-test
       image: python:latest
       command: ["/bin/sh","-c"]
-      args: ["pip install nose-tap && nosetests --with-tap /tests/run.py"]
+      args: ["wget -NP /usr/bin https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            && chmod 755 /usr/bin/kubectl
+            && pip install nose-tap
+            && nosetests --with-tap /tests/run.py"]
       volumeMounts:
       - mountPath: /tests
         name: tests
