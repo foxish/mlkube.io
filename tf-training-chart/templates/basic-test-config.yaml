@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cmle-tests
+data:
+  run.py: |-
+    #! /usr/bin/python
+    def test_trivial():
+        assert "a" == "a"
+
+    # more tests here
