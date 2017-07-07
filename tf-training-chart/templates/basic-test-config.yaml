@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cmle-tests
+data:
+  run.py: |-
+    #! /usr/bin/python
+    from subprocess import call
+
+    def test_trivial():
+        assert "a" == "a"
+
+    def test_create():
+        return_code = call("kubectl delete -f https://raw.githubusercontent.com/jlewi/mlkube.io/master/examples/tf_job.yaml", shell=True)
+        assert(return_code == 0)
+
+        return_code = call("kubectl create -f https://raw.githubusercontent.com/jlewi/mlkube.io/master/examples/tf_job.yaml", shell=True)
+        assert(return_code == 0)
+
+    # more tests here
